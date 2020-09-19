@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-
 export default createGlobalStyle`
   html {
     --color-text-high: rgba(255, 255, 255, 0.87);
