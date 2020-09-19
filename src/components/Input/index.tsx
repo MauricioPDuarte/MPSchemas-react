@@ -29,13 +29,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, ...rest }) => {
   return (
     <Container isFocused={isFocused} isFilled={isFilled} isErrored={meta.touched && !!meta.error}>
       {Icon && <Icon size={20} />}
-      <input
-        {...field}
-        {...rest}
-        type="text"
-        onBlur={(event) => handleInputBlur(event)}
-        onFocus={() => handleInputFocus()}
-      />
+      <input {...field} {...rest} onBlur={(event) => handleInputBlur(event)} onFocus={() => handleInputFocus()} />
       {meta.touched && meta.error ? (
         <Error title={meta.error}>
           <FiAlertCircle size={20} />
