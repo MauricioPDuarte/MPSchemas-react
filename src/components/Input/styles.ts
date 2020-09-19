@@ -1,11 +1,19 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+import Tooltip from '../Tooltip';
+
+interface IContainerProps {
+  isFocused: boolean;
+  isFilled: boolean;
+  isErrored: boolean;
+}
+
+export const Container = styled.div<IContainerProps>`
   width: 100%;
   border-radius: 5px;
   background: var(--color-elevation2);
   padding: 18px;
-  border: 2px solid var(--color-elevation2);
+  border: 1px solid var(--color-elevation2);
   color: #666360;
 
   display: flex;
@@ -27,5 +35,44 @@ export const Container = styled.div`
 
   svg {
     margin-right: 16px;
+  }
+
+  ${(props) =>
+    props.isFocused &&
+    css`
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    `}
+
+  ${(props) =>
+    props.isFilled &&
+    css`
+      color: var(--color-primary);
+    `}
+
+    ${(props) =>
+    props.isErrored &&
+    css`
+      color: var(--color-error);
+      border-color: var(--color-error);
+    `}
+`;
+
+export const Error = styled(Tooltip)`
+  height: 20px;
+  margin-left: 16px;
+
+  svg {
+    margin: 0;
+    color: var(--color-error);
+  }
+
+  span {
+    background: var(--color-error);
+    color: var(--color-text-medium);
+
+    &::before {
+      border-color: var(--color-error) transparent;
+    }
   }
 `;
