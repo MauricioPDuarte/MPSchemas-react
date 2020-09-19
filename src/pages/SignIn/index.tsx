@@ -3,7 +3,7 @@ import { FiMail, FiLock } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -31,10 +31,14 @@ const SignIn: React.FC = () => {
             password: Yup.string().required('Campo obrigatório!'),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            signIn({
-              email: values.email,
-              password: values.password,
-            });
+            try {
+              signIn({
+                email: values.email,
+                password: values.password,
+              });
+            } catch (err) {
+              // Disparar um toast
+            }
 
             setSubmitting(false);
           }}
