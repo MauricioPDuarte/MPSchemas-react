@@ -23,14 +23,14 @@ const SignUp: React.FC = () => {
           }}
           validationSchema={Yup.object({
             name: Yup.string()
-              .min(2, 'Deve conter no mínimo 2 caracteres')
-              .max(26, 'Deve conter no máximo 26 caracteres')
-              .required('Campo obrigatório'),
-            email: Yup.string().email('E-mail inválido').required('Campo obrigatório'),
-            password: Yup.string().required('Campo obrigatório'),
+              .min(2, 'Deve conter no mínimo 2 caracteres!')
+              .max(26, 'Deve conter no máximo 26 caracteres!')
+              .required('Campo obrigatório!'),
+            email: Yup.string().email('E-mail inválido!').required('Campo obrigatório!'),
+            password: Yup.string().required('Campo obrigatório!'),
             passwordConfirm: Yup.string()
-              .oneOf([Yup.ref('password')])
-              .required('Campo obrigatório'),
+              .oneOf([Yup.ref('password')], 'As senhas não coincidem!')
+              .required('Campo obrigatório!'),
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
