@@ -8,6 +8,7 @@ export default createGlobalStyle`
 
     --color-background: #121212;
     --color-primary: #7B1FA2;
+    --color-error: #c53030;
 
     --color-elevation1: #202024;
     --color-elevation2: #29292e;
