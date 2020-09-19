@@ -24,7 +24,7 @@ export const Container = styled.div<IContainerProps>`
   }
 
   input {
-    flex: 1;
+    width: 100%;
     color: #fff;
     background: transparent;
 
@@ -33,7 +33,7 @@ export const Container = styled.div<IContainerProps>`
     }
   }
 
-  svg {
+  > svg {
     margin-right: 16px;
   }
 
@@ -60,9 +60,9 @@ export const Container = styled.div<IContainerProps>`
 
 export const Error = styled(Tooltip)`
   height: 20px;
-  margin-left: 16px;
+  margin-left: 4px;
 
-  svg {
+  > svg {
     margin: 0;
     color: var(--color-error);
   }

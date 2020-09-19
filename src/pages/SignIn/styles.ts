@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 350px;
+  max-width: 380px;
   background: var(--color-elevation1);
   padding: 40px;
 
@@ -37,20 +37,20 @@ export const Content = styled.div`
 
   form {
     width: 100%;
+  }
 
-    a {
-      width: 100%;
-      color: var(--color-primary);
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-      font-size: 14px;
-      transition: color 0.2s;
-      font-weight: 500;
+  > a {
+    width: 100%;
+    color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    font-size: 14px;
+    transition: color 0.2s;
+    font-weight: 500;
 
-      &:hover {
-        color: ${shade(0.2, '#7B1FA2')};
-      }
+    &:hover {
+      color: ${shade(0.2, '#7B1FA2')};
     }
   }
 

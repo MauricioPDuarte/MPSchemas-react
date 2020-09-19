@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 370px;
+  max-width: 380px;
   background: var(--color-elevation1);
   padding: 40px;
 
