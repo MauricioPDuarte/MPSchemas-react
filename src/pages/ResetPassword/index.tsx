@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiLock } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import { createFalse } from 'typescript';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 
@@ -16,6 +17,7 @@ const ResetPassword: React.FC = () => {
   const { addToast } = useToast();
   const location = useLocation();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   return (
     <Container>
@@ -35,6 +37,8 @@ const ResetPassword: React.FC = () => {
           })}
           onSubmit={async (values, { setSubmitting }) => {
             try {
+              setLoading(true);
+
               const { password } = values;
               const token = location.search.replace('?token=', '');
 
@@ -60,6 +64,8 @@ const ResetPassword: React.FC = () => {
                 title: 'Erro ao resetar senha',
                 description: 'Ocorreu um erro ao resetar sua senha, tente novamente.',
               });
+            } finally {
+              setLoading(false);
             }
 
             setSubmitting(false);
@@ -70,7 +76,9 @@ const ResetPassword: React.FC = () => {
               <Input name="password" type="password" placeholder="Nova senha" icon={FiLock} />
               <Input name="passwordConfirm" type="password" placeholder="Confirmar senha" icon={FiLock} />
 
-              <Button type="submit">Alterar senha</Button>
+              <Button type="submit" loading={loading}>
+                Alterar senha
+              </Button>
             </form>
           )}
         </Formik>

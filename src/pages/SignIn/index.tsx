@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -16,6 +16,7 @@ const SignIn: React.FC = () => {
   const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   return (
     <Container>
@@ -34,6 +35,8 @@ const SignIn: React.FC = () => {
           })}
           onSubmit={async (values, { setSubmitting }) => {
             try {
+              setLoading(true);
+
               await signIn({
                 email: values.email,
                 password: values.password,
@@ -46,6 +49,8 @@ const SignIn: React.FC = () => {
                 title: 'Erro na autenticação',
                 description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
               });
+            } finally {
+              setLoading(false);
             }
 
             setSubmitting(false);
@@ -56,7 +61,9 @@ const SignIn: React.FC = () => {
               <Input name="email" type="email" placeholder="E-mail" icon={FiMail} />
               <Input name="password" type="password" placeholder="Senha" icon={FiLock} />
 
-              <Button type="submit">Entrar</Button>
+              <Button type="submit" loading={loading}>
+                Entrar
+              </Button>
             </form>
           )}
         </Formik>

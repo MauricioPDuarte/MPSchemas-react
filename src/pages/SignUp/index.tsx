@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -16,6 +16,7 @@ import { Container, Content } from './styles';
 const SignUp: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   return (
     <Container>
@@ -42,6 +43,8 @@ const SignUp: React.FC = () => {
           })}
           onSubmit={async (values, { setSubmitting }) => {
             try {
+              setLoading(true);
+
               await api.post('/users', values);
 
               addToast({
@@ -57,6 +60,8 @@ const SignUp: React.FC = () => {
                 title: 'Erro no cadastro',
                 description: 'Ocorreu um erro ao fazer o cadastro, tente novamente.',
               });
+            } finally {
+              setLoading(false);
             }
 
             setSubmitting(false);
@@ -68,7 +73,9 @@ const SignUp: React.FC = () => {
               <Input name="email" type="email" placeholder="E-mail" icon={FiMail} />
               <Input name="password" type="password" placeholder="Senha" icon={FiLock} />
               <Input name="passwordConfirm" type="password" placeholder="Confirmar senha" icon={FiLock} />
-              <Button type="submit">Cadastrar</Button>
+              <Button type="submit" loading={loading}>
+                Cadastrar
+              </Button>
             </form>
           )}
         </Formik>
