@@ -13,7 +13,7 @@ import Button from '../../components/Button';
 import { Container, Content } from './styles';
 
 const SignIn: React.FC = () => {
-  const { signIn, user } = useAuth();
+  const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
 
@@ -61,7 +61,7 @@ const SignIn: React.FC = () => {
           )}
         </Formik>
 
-        <a href="/">Esqueci minha senha</a>
+        <Link to="/forgot-password">Esqueci minha senha</Link>
 
         <span>
           Ainda não possui uma conta?

@@ -15,12 +15,15 @@ const Input: React.FC<InputProps> = ({ icon: Icon, ...rest }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
-  const handleInputBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
-    field.onBlur(event);
-    setIsFocused(false);
+  const handleInputBlur = useCallback(
+    (event: React.FocusEvent<HTMLInputElement>) => {
+      field.onBlur(event);
+      setIsFocused(false);
 
-    setIsFilled(!!event.currentTarget.value);
-  }, []);
+      setIsFilled(!!event.currentTarget.value);
+    },
+    [field],
+  );
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
