@@ -2,6 +2,7 @@ import React from 'react';
 import { FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -52,7 +53,7 @@ const SignUp: React.FC = () => {
 
         <span>
           Já possui uma conta?
-          <a href="/"> Fazer login</a>
+          <Link to="/"> Fazer login</Link>
         </span>
       </Content>
     </Container>
