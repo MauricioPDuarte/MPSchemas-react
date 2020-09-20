@@ -2,7 +2,11 @@ import React from 'react';
 import { FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
+import api from '../../services/api';
+
+import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -10,6 +14,9 @@ import Button from '../../components/Button';
 import { Container, Content } from './styles';
 
 const SignUp: React.FC = () => {
+  const { addToast } = useToast();
+  const history = useHistory();
+
   return (
     <Container>
       <Content>
@@ -33,11 +40,26 @@ const SignUp: React.FC = () => {
               .oneOf([Yup.ref('password')], 'As senhas não coincidem!')
               .required('Campo obrigatório!'),
           })}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values, { setSubmitting }) => {
+            try {
+              await api.post('/users', values);
+
+              addToast({
+                type: 'success',
+                title: 'Cadastro realizado!',
+                description: 'Você já pode fazer seu login no MPSchemas!',
+              });
+
+              history.push('/');
+            } catch (err) {
+              addToast({
+                type: 'error',
+                title: 'Erro no cadastro',
+                description: 'Ocorreu um erro ao fazer o cadastro, tente novamente.',
+              });
+            }
+
+            setSubmitting(false);
           }}
         >
           {(formik) => (

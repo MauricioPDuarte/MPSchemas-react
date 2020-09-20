@@ -2,7 +2,7 @@ import React from 'react';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -15,6 +15,7 @@ import { Container, Content } from './styles';
 const SignIn: React.FC = () => {
   const { signIn, user } = useAuth();
   const { addToast } = useToast();
+  const history = useHistory();
 
   return (
     <Container>
@@ -37,6 +38,8 @@ const SignIn: React.FC = () => {
                 email: values.email,
                 password: values.password,
               });
+
+              history.push('/profile');
             } catch (err) {
               addToast({
                 type: 'error',
