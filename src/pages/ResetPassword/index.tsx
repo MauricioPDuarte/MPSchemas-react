@@ -4,7 +4,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import { createFalse } from 'typescript';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 
