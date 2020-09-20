@@ -3,7 +3,8 @@ import { FiMail, FiLock } from 'react-icons/fi';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -12,6 +13,7 @@ import { Container, Content } from './styles';
 
 const SignIn: React.FC = () => {
   const { signIn, user } = useAuth();
+  const { addToast } = useToast();
 
   console.log(user);
 
@@ -30,14 +32,18 @@ const SignIn: React.FC = () => {
             email: Yup.string().email('E-mail inválido!').required('Campo obrigatório!'),
             password: Yup.string().required('Campo obrigatório!'),
           })}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={async (values, { setSubmitting }) => {
             try {
-              signIn({
+              await signIn({
                 email: values.email,
                 password: values.password,
               });
             } catch (err) {
-              // Disparar um toast
+              addToast({
+                type: 'error',
+                title: 'Erro na autenticação',
+                description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+              });
             }
 
             setSubmitting(false);
